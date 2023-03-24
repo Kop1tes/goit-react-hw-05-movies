@@ -12,7 +12,7 @@ export const gerFetchTrendingMovie = async () => {
 
 export const fetchMovies = async query => {
     const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/550?api_key=${API_KEY}&query=${query}&page=1`
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=1`
     );
     return response.data;
 };
