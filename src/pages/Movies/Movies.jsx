@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchMovies } from "services/moviesApi";
+import { fetchMovies } from "../../services/moviesApi";
 import { MovieSearch } from "components/MovieSearch/MovieSearch";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { Container } from "components/Container/Container";
