@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { fetchMovies } from "../../services/moviesApi";
 import { MovieSearch } from "components/MovieSearch/MovieSearch";
-import { useSearchParams, useLocation } from "react-router-dom";
+import { useSearchParams, useLocation, NavLink } from "react-router-dom";
 import { Container } from "components/Container/Container";
-import { List, Item, LinkNav, ItemImg } from "./Movies.styled";
+import { List, Item,  ItemImg } from "./Movies.styled";
 import loading from 'img/loading.jpg';
 
 const ERROR_MESSAGE = "Что-то пошло не так, перезагрузите страницу...";
@@ -51,9 +51,9 @@ const Movies = () => {
                                 src={movie.poster_path ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}` : loading}
                                 alt={movie.original_title ?? movie.original_name}
                             />
-                            <LinkNav to={`${movie.id}`} state={{ from: location }}>
+                            <NavLink to={`${movie.id}`} state={{ from: location }}>
                                 {movie.title}
-                            </LinkNav>
+                            </NavLink>
                         </Item>
                     ))}
                 </List>
