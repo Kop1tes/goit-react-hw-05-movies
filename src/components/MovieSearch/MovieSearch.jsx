@@ -27,12 +27,12 @@ export const MovieSearch = ({ query, onSearch }) => {
         e.preventDefault();
         if (query.trim() === "") {
             return toast.error(
-                "Sorry, there are no movies matchingyour search query. Please try again.",
+                "Sorry, there are no movies matching your search query. Please try again.",
                 { theme: "colored" }
             );
         }
         onSearch(query);
-        setSearchQuery("");
+        // setSearchQuery("");
     };
 
     return (
