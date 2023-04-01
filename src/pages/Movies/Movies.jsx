@@ -5,6 +5,10 @@ import { useSearchParams, useLocation, NavLink } from "react-router-dom";
 import { Container } from "components/Container/Container";
 import { List, Item,  ItemImg } from "./Movies.styled";
 import loading from 'img/loading.jpg';
+// import { Button, ButtonLabel, Form, Input, Label } from "./MovieSearch.styled";
+import { Button, ButtonLabel, Form, Input, Label} from "components/MovieSearch/MovieSearch.styled";
+import { ToastContainer } from "react-toastify";
+// import { Button, ButtonLabel, Form, Input, Label } from "./MovieSearch.styled";
 
 const ERROR_MESSAGE = "Что-то пошло не так, перезагрузите страницу...";
 
@@ -14,41 +18,61 @@ const Movies = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
-    const query = searchParams.get('query') ?? '';
+    const query = searchParams.get('query');
+    // const [searchQuery, setSearchQuery] = useState(null);
 
     useEffect(() => {
-        if (!query) {
+        if (query === "") {
             return;
         }
 
         async function getMovies() {
-            try {
-                setIsLoading(true);
-                const movies = await fetchMovies(query);
+            // try {
+            //     setIsLoading(true);
+            //     const movies = await fetchMovies(query);
+            //     setMovies(movies.results);
+            // } catch {
+            //     setError(ERROR_MESSAGE);
+            // } finally {
+            //     setIsLoading(false);
+            // }
+
+            const movies = await fetchMovies(query);
                 setMovies(movies.results);
-            } catch {
-                setError(ERROR_MESSAGE);
-            } finally {
-                setIsLoading(false);
-            }
         }
         getMovies();
     }, [query]);
 
-    function onSubmit(value) {
-        setSearchParams({ query: `${value}` });
-    }
-
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     const form = e.currentTarget;
-    //     setSearchParams({ username: form.elements.username.value }));
-    //     form.reset();
-    // };
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        setSearchParams({ query: form.elements.search.value });
+        // const nextParams = query !== "" ? { query } : {};
+        // setSearchParams(nextParams);
+        form.reset();
+    };
 
     return (
         <Container>
-            <MovieSearch query={query} isLoading={isLoading} onSearch={onSubmit} />
+            <Container>
+            <Form onSubmit={handleSubmit}>
+                <Button type="submit">
+                    <ButtonLabel>Search</ButtonLabel>
+                </Button>
+                <Label>
+                    <Input
+                        type="text"
+                        placeholder="Search movies"
+                        name="search"
+                        value={query}
+                            onChange={(e) => handleSubmit(e.target.value)}
+                            // onChange={handleSubmit}
+                    />
+                </Label>
+            </Form>
+            <ToastContainer />
+        </Container>
+            {/* <MovieSearch query={query} onSearch={handleSubmit} /> */}
             {error && <p>{error}</p>}
             {movies.length > 0 && (
                 <List>
