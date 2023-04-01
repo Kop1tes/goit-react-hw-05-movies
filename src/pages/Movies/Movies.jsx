@@ -39,6 +39,13 @@ const Movies = () => {
         setSearchParams({ query: `${value}` });
     }
 
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     const form = e.currentTarget;
+    //     setSearchParams({ username: form.elements.username.value }));
+    //     form.reset();
+    // };
+
     return (
         <Container>
             <MovieSearch query={query} isLoading={isLoading} onSearch={onSubmit} />
