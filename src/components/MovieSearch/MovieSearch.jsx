@@ -17,8 +17,6 @@ export const MovieSearch = ({ query, onSearch }) => {
                         type="text"
                         placeholder="Search movies"
                         name="search"
-                        // value={query}
-                        // onChange={(e) => onSearch(e.target.value)}
                     />
                 </Label>
             </Form>
