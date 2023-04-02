@@ -17,7 +17,7 @@ const Movies = () => {
     const query = searchParams.get("query");
 
     useEffect(() => {
-        if (!query === "") {
+        if (query === "") {
             return;
         }
 
