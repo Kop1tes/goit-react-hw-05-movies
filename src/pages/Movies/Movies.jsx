@@ -65,7 +65,7 @@ const Movies = () => {
                         placeholder="Search movies"
                         name="search"
                         value={query}
-                            onChange={(e) => handleSubmit(e.target.value)}
+                            // onChange={(e) => handleSubmit(e.target.value)}
                             // onChange={handleSubmit}
                     />
                 </Label>
