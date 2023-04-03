@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchMovies } from "../../services/moviesApi";
 // import { MovieSearch } from "components/MovieSearch/MovieSearch";
-import { useSearchParams, useLocation, NavLink } from "react-router-dom";
+import { useSearchParams, useLocation, Link } from "react-router-dom";
 import { Container } from "components/Container/Container";
 import { List, Item,  ItemImg } from "./Movies.styled";
 import loading from 'img/loading.jpg';
@@ -17,10 +17,10 @@ const Movies = () => {
     // const [isLoading, setIsLoading] = useState(false);   
     // const [error, setError] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
-    const query = searchParams.get("query");
+    const query = searchParams.get("query") ?? "";
 
     useEffect(() => {
-        if (query === "") return;
+        if (!query === "") return;
 
         async function getMovies() {
             // try {
@@ -73,9 +73,9 @@ const Movies = () => {
                                 src={movie.poster_path ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}` : loading}
                                 alt={movie.original_title ?? movie.original_name}
                             />
-                            <NavLink to={`${movie.id}`} state={{ from: location }}>
+                            <Link to={`${movie.id}`} state={{ from: location }}>
                                 {movie.title}
-                            </NavLink>
+                            </Link>
                         </Item>
                     ))}
                 </List>
